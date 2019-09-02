@@ -63,3 +63,14 @@ Function to calculate the percentage of population round to 2 decimal
         percenrage_population.append(round(i/numpy.sum(population)*100, 2))
 
     return np.array(percenrage_population)
+
+
+def csv_output(head, data, population_percentage):
+"""
+Function that create the output file csv with the information of Chile
+"""
+    output = np.concatenate((data, population_percentage.T),axis=1)
+    output = np.concatenate((head, output), axis=0)
+    output = output.astype('str')
+
+    return np.savetxt('Chile.csv', output, delimiter=",",fmt="%s")
