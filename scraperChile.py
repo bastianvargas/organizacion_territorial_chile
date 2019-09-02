@@ -51,3 +51,15 @@ def scraper_data_chile():
             chile_data2=[]
 
     return np.array([title]), np.array(chile_data), np.array([population])
+
+
+def percenrage(population):
+"""
+Function to calculate the percentage of population round to 2 decimal
+"""
+    percenrage_population = []
+
+    for i in population:
+        percenrage_population.append(round(i/numpy.sum(population)*100, 2))
+
+    return np.array(percenrage_population)
