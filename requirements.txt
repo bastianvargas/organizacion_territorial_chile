@@ -1,0 +1,12 @@
+eautifulsoup4==4.8.0
+certifi==2019.6.16
+chardet==3.0.4
+idna==2.8
+numpy==1.17.1
+pip==19.2.3
+requests==2.22.0
+setuptools==41.2.0
+soupsieve==1.9.3
+Unidecode==1.1.1    
+urllib3==1.25.3
+wheel==0.33.6
