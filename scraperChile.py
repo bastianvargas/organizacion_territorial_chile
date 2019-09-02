@@ -40,7 +40,7 @@ def scraper_data_chile():
             a=l_td.find_all('a')
             chile_data2.append(a[0].get_text())
         else:
-            l_td = unidecode(i.get_text()).replace(" ","").replace(",",".")
+            l_td = unidecode(l_td.get_text()).replace(" ","").replace(",",".")
             if '(' in l_td:
                 l_td = l_td.split("(")[0]
             chile_data2.append(float(l_td))
@@ -53,24 +53,31 @@ def scraper_data_chile():
     return np.array([title]), np.array(chile_data), np.array([population])
 
 
-def percenrage(population):
-"""
-Function to calculate the percentage of population round to 2 decimal
-"""
-    percenrage_population = []
+def percentage(population):
+    """
+    Function to calculate the percentage of population
+    """
+    percentage_population = []
 
     for i in population:
-        percenrage_population.append(round(i/numpy.sum(population)*100, 2))
+        percentage_population.append(i/np.sum(population)*100)
 
-    return np.array(percenrage_population)
+    return np.array(percentage_population)
 
 
-def csv_output(head, data, population_percentage):
-"""
-Function that create the output file csv with the information of Chile
-"""
-    output = np.concatenate((data, population_percentage.T),axis=1)
-    output = np.concatenate((head, output), axis=0)
+def csv_output(title, table, population_percentage):
+    """
+    Function that create the output file csv with the information of Chile
+    """
+    output = np.concatenate((table, population_percentage.T),axis=1)
+    output = np.concatenate((title, output), axis=0)
     output = output.astype('str')
 
     return np.savetxt('Chile.csv', output, delimiter=",",fmt="%s")
+
+
+
+if __name__ == '__main__':
+    title,table,population = scraper_data_chile()
+    population_percentage = percentage(population)
+    csv_output(title,table,population_percentage)
